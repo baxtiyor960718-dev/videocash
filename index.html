@@ -1,89 +1,10 @@
-<!doctype html>
-<html lang="uz">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071512">
-<title>VideoCash</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<style>
-:root{--bg:#071512;--panel:#10231f;--panel2:#142c26;--mint:#42e6c0;--muted:#9ab3ac;--line:#23443b}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#17453a 0,#071512 42%);color:#f1fbf7;font:16px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
-main{max-width:520px;margin:auto;padding:22px 16px 100px}.top{display:flex;justify-content:space-between;align-items:center;margin:8px 2px 22px}.brand{font-size:23px;font-weight:850;letter-spacing:.3px}.brand span{color:var(--mint)}.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#4ff0c9,#148d78);display:grid;place-items:center;color:#06221b;font-weight:900}
-.eyebrow{color:var(--muted);font-size:12px;letter-spacing:2px;font-weight:750}.balance{background:linear-gradient(145deg,#17372f,#0e211c);border:1px solid #2b5448;border-radius:25px;padding:21px;box-shadow:0 16px 40px #0004}.money{font-size:42px;font-weight:850;margin:8px 0 3px;letter-spacing:-1.5px}.money small{font-size:20px;color:#b7d1c9}.pill{display:inline-flex;background:#163d32;color:var(--mint);border:1px solid #286451;padding:7px 11px;border-radius:30px;font-size:12px;font-weight:700}
-.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:16px 0}.action{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:left;color:white;cursor:pointer}.action b{display:block;margin-top:8px}.ico{font-size:23px}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin:24px 2px 12px}.section-head h2{font-size:18px;margin:0}.muted{color:var(--muted);font-size:13px}
-.task{display:flex;gap:13px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:13px;margin-bottom:10px}.thumb{width:72px;height:62px;border-radius:13px;background:linear-gradient(135deg,#1e6b59,#0b2821);display:grid;place-items:center;font-size:27px}.task-info{flex:1}.task-info b{display:block;font-size:14px}.task-info small{color:var(--muted)}button{border:0;border-radius:12px;padding:10px 13px;background:var(--mint);color:#06231c;font-weight:800;cursor:pointer}.task button{font-size:12px}.nav{position:fixed;bottom:0;left:0;right:0;background:#0c201b;backdrop-filter:blur(15px);border-top:1px solid var(--line);display:flex;justify-content:center;padding:10px max(10px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom));z-index:5}.navin{width:min(520px,100%);display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.nav button{background:transparent;color:var(--muted);padding:8px 3px;font-size:11px}.nav button.active{color:var(--mint);background:#14372e}.page{display:none}.page.active{display:block}.notice{border:1px solid #725d2d;background:#2b2617;color:#e9d9a6;border-radius:14px;padding:12px;font-size:12px;line-height:1.5;margin-top:14px}.field{width:100%;padding:14px;border-radius:13px;border:1px solid var(--line);background:#091a15;color:white;margin:10px 0}.wide{width:100%;margin-top:10px}.profile{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px;margin:12px 0}
-</style>
-</head>
-<body>
-<main>
- <header class="top"><div class="brand">Video<span>Cash</span></div><div class="avatar" id="avatar">V</div></header>
-
- <section class="page active" id="home">
-  <div class="balance">
-   <div class="eyebrow">SIZNING DEMO BALANSINGIZ</div>
-   <div class="money"><span id="balance">0.00</span><small> VC</small></div>
-   <span class="pill">● Sinov rejimi</span>
-   <p class="muted" style="margin:14px 0 0">Bu prototipdagi ballar haqiqiy pul emas.</p>
-  </div>
-  <div class="actions">
-   <button class="action" onclick="showPage('videos')"><span class="ico">▶️</span><b>Video ko‘rish</b><small class="muted">Topshiriqlar</small></button>
-   <button class="action" onclick="showPage('invite')"><span class="ico">👥</span><b>Do‘st taklif qilish</b><small class="muted">Taklif havolasi</small></button>
-  </div>
-  <div class="section-head"><h2>Bugungi topshiriqlar</h2><span class="muted">Demo</span></div>
-  <div class="task"><div class="thumb">🎬</div><div class="task-info"><b>Tanishtiruv videosi</b><small>Demo topshiriq · 10 VC</small></div><button onclick="claimDemo()">Sinash</button></div>
-  <div class="notice">Demo rejim: tugma faqat sinov ballarini ko‘rsatadi. Haqiqiy mukofotlar reklama hamkori, server tekshiruvi va moliyalashtirish yo‘lga qo‘yilgandan keyin qo‘shiladi.</div>
- </section>
-
- <section class="page" id="videos">
-  <div class="section-head"><h2>Video topshiriqlar</h2><span class="muted">Sinov</span></div>
-  <div class="task"><div class="thumb">▶</div><div class="task-info"><b>VideoCash bilan tanishing</b><small>Namoyish · 10 VC</small></div><button onclick="claimDemo()">Ko‘rish</button></div>
-  <div class="task"><div class="thumb">📺</div><div class="task-info"><b>Hamkor video joyi</b><small>Hozircha mavjud emas</small></div><button disabled style="opacity:.45">Tez orada</button></div>
-  <div class="notice">Video ko‘rishning o‘zi reklama daromadi yaratmaydi. Mukofotli videolar faqat reklama tarmog‘i qoidalari ruxsat berganida ulanadi.</div>
- </section>
-
- <section class="page" id="invite">
-  <div class="section-head"><h2>Do‘stlarni taklif qiling</h2></div>
-  <div class="profile"><div class="eyebrow">SIZNING TAKLIF HAVOLANGIZ</div><p class="muted">Bot yaratilgach, shaxsiy referral havolangiz shu yerda ko‘rinadi.</p><button class="wide" onclick="copyInvite()">Havolani nusxalash</button></div>
-  <div class="notice">Taklif bonusi hozircha demo rejimda o‘chirilgan. Soxta yoki kafolatsiz daromad va’dasi berilmaydi.</div>
- </section>
-
- <section class="page" id="wallet">
-  <div class="section-head"><h2>Hamyon va yechish</h2></div>
-  <div class="profile"><div class="eyebrow">TO‘LOV HOLATI</div><h2 style="margin:8px 0">Hali ulanmagan</h2><p class="muted">USDT TRC20 to‘lovlari backend va xavfsizlik tekshiruvi tayyor bo‘lgach ulanadi.</p></div>
-  <input class="field" placeholder="USDT TRC20 manzili (demo)" disabled>
-  <button class="wide" disabled style="opacity:.45">Yechish — hozircha yopiq</button>
-  <div class="notice">Hech qachon foydalanuvchidan pul yechish uchun oldindan depozit yoki “aktivatsiya to‘lovi” talab qilmang.</div>
- </section>
-</main>
-<nav class="nav"><div class="navin">
- <button class="active" data-page="home" onclick="showPage('home')">⌂<br>Bosh sahifa</button>
- <button data-page="videos" onclick="showPage('videos')">▶<br>Videolar</button>
- <button data-page="invite" onclick="showPage('invite')">♧<br>Taklif</button>
- <button data-page="wallet" onclick="showPage('wallet')">▣<br>Hamyon</button>
-</div></nav>
-<script>
-const tg = window.Telegram?.WebApp;
-if (tg) { tg.ready(); tg.expand(); }
-const user = tg?.initDataUnsafe?.user;
-if (user) {
- document.getElementById('avatar').textContent = (user.first_name || 'V').slice(0,1).toUpperCase();
-}
-function showPage(id) {
- document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
- document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
- window.scrollTo({top:0,behavior:'smooth'});
-}
-function claimDemo() {
- let v = Number(document.getElementById('balance').textContent) + 10;
- document.getElementById('balance').textContent = v.toFixed(2);
- alert('Demo: 10 VC sinov balli qo‘shildi. Bu haqiqiy pul emas.');
-}
-async function copyInvite() {
- const link = 'Telegram bot yaratilgach, referral havola shu yerda bo‘ladi.';
- try { await navigator.clipboard.writeText(link); alert('Demo matn nusxalandi.'); }
- catch(e) { alert(link); }
-}
-</script>
-</body></html>
+<!doctype html><html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071512"><title>VideoCash</title><script src="https://telegram.org/js/telegram-web-app.js"></script><style>
+:root{--bg:#071512;--panel:#10231f;--mint:#42e6c0;--muted:#9ab3ac;--line:#23443b}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#17453a,#071512 45%);color:#f1fbf7;font:15px system-ui}main{max-width:540px;margin:auto;padding:18px 15px 90px}.top,.row,.section{display:flex;justify-content:space-between;align-items:center;gap:10px}.brand{font-size:24px;font-weight:900}.brand span{color:var(--mint)}.avatar{background:var(--mint);color:#06221b;border-radius:50%;padding:12px;font-weight:900}.page{display:none}.page.active{display:block}.balance,.card,.task,.tile{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:15px;margin:10px 0}.balance{background:linear-gradient(145deg,#17372f,#0e211c);padding:20px}.eyebrow,.muted{color:var(--muted);font-size:12px}.money{font-size:38px;font-weight:900;margin:8px 0}.pill,.tag{color:var(--mint);border:1px solid #286451;border-radius:20px;padding:5px 9px;font-size:11px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.tile{cursor:pointer}.tile b{display:block;margin-top:7px}.section{margin:20px 2px 10px}.section h2{font-size:18px;margin:0}.task{display:flex;align-items:center;gap:12px}.thumb{width:55px;height:55px;border-radius:12px;background:#17483b;display:grid;place-items:center;font-size:24px}.info{flex:1}.info b{display:block;font-size:14px;margin-bottom:4px}button{border:0;border-radius:10px;padding:9px 12px;background:var(--mint);color:#06231c;font-weight:800;cursor:pointer}button:disabled{opacity:.4}.small{font-size:11px}.notice{background:#2b2617;border:1px solid #725d2d;color:#e9d9a6;padding:11px;border-radius:12px;font-size:11px;line-height:1.5;margin:12px 0}.field{width:100%;padding:12px;background:#091a15;border:1px solid var(--line);border-radius:10px;color:white;margin:7px 0}.wide{width:100%}.nav{position:fixed;bottom:0;left:0;right:0;background:#0c201bf2;border-top:1px solid var(--line);display:flex;justify-content:center;padding:8px}.navin{width:min(540px,100%);display:grid;grid-template-columns:repeat(5,1fr)}.nav button{background:transparent;color:var(--muted);font-size:10px}.nav button.active{color:var(--mint);background:#14372e}
+</style></head><body><main><header class="top"><div class="brand">Video<span>Cash</span></div><div class="avatar" id="avatar">V</div></header>
+<section class="page active" id="home"><div class="balance"><div class="eyebrow">DEMO BALANS</div><div class="money"><span id="bal">0.00</span> VC</div><span class="pill">Sinov rejimi</span><p class="muted">VC ballari haqiqiy pul emas.</p></div><div class="grid"><div class="tile" onclick="go('videos')">🎬<b>Video ko‘rish</b><span class="muted">Homiylik videolari</span></div><div class="tile" onclick="go('tasks')">📋<b>Topshiriqlar</b><span class="muted">Kampaniyalar</span></div><div class="tile" onclick="go('invite')">👥<b>Do‘st taklif qilish</b></div><div class="tile" onclick="go('wallet')">💳<b>Hamyon</b><span class="muted">USDT / Uzcard / Humo</span></div></div><div class="section"><h2>Bugungi topshiriqlar</h2><span class="tag">DEMO</span></div><div class="task"><div class="thumb">▶️</div><div class="info"><b>VideoCash tanishtiruv</b><span class="muted">Namoyish · 10 VC</span></div><button class="small" onclick="reward()">Sinash</button></div><div class="notice">Mukofotlar faqat haqiqiy homiylik budjeti va server tasdig‘i bilan beriladi. Sun’iy ko‘rish, layk yoki obuna sotilmaydi.</div></section>
+<section class="page" id="videos"><div class="section"><h2>Video kutubxonasi</h2></div><div class="task"><div class="thumb">🎥</div><div class="info"><b>VideoCash homiylik videosi</b><span class="muted">O‘zimiz joylagan video · demo</span></div><button class="small" onclick="reward()">Ko‘rish</button></div><div class="task"><div class="thumb">▶</div><div class="info"><b>YouTube kontenti</b><span class="muted">Kontentni ochish; ko‘rish/layk uchun haq yo‘q</span></div></div><div class="task"><div class="thumb">📸</div><div class="info"><b>Instagram kontenti</b><span class="muted">Kontent bilan tanishish</span></div></div><div class="task"><div class="thumb">✈️</div><div class="info"><b>Telegram hamkor kanali</b><span class="muted">Kanal bilan tanishish</span></div></div></section>
+<section class="page" id="tasks"><div class="section"><h2>Topshiriqlar</h2></div><div class="task"><div class="thumb">📝</div><div class="info"><b>So‘rovnomada qatnashish</b><span class="muted">Homiylik kampaniyasi · demo</span></div><button class="small" onclick="reward()">Bajarish</button></div><div class="notice">Har bir kampaniya shartlari va mukofoti admin tomonidan belgilanadi.</div></section>
+<section class="page" id="invite"><div class="section"><h2>Do‘stlarni taklif qilish</h2></div><div class="card"><p class="muted">Bot va backend ulangach, shaxsiy referral havolasi yaratiladi.</p></div></section>
+<section class="page" id="wallet"><div class="section"><h2>Hamyon va pul yechish</h2></div><div class="card"><div class="eyebrow">TO‘LOV USULI</div><select class="field" disabled><option>USDT TRC20</option><option>Uzcard</option><option>Humo</option></select><input class="field" placeholder="Hamyon/karta ma’lumoti" disabled><input class="field" placeholder="Yechish summasi" disabled><button class="wide" disabled>Yechish — backend ulanmagan</button><p class="muted">Demo rejimda karta ma’lumotlarini kiritmang.</p></div><div class="notice">Haqiqiy to‘lov uchun server, to‘lov provayderi va xavfsizlik tekshiruvi zarur. Oldindan depozit talab qilinmaydi.</div></section></main>
+<nav class="nav"><div class="navin"><button class="active" onclick="go('home')">⌂<br>Bosh</button><button onclick="go('videos')">▶<br>Video</button><button onclick="go('tasks')">☷<br>Vazifa</button><button onclick="go('invite')">♧<br>Taklif</button><button onclick="go('wallet')">▣<br>Hamyon</button></div></nav>
+<script>const tg=window.Telegram?.WebApp;if(tg){tg.ready();tg.expand();let u=tg.initDataUnsafe?.user;if(u)document.getElementById('avatar').textContent=(u.first_name||'V')[0].toUpperCase()}function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach((b,i)=>b.classList.toggle('active',['home','videos','tasks','invite','wallet'][i]===id));scrollTo(0,0)}function reward(){let e=document.getElementById('bal');e.textContent=(Number(e.textContent)+10).toFixed(2);alert('Demo: 10 VC qo‘shildi. Bu haqiqiy pul emas.');}</script></body></html>
